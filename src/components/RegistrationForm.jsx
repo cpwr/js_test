@@ -6,10 +6,26 @@ import PasswordField from './PasswordField.jsx';
 class RegistrationForm extends Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+        email: "",
+        emailError: "",
+        password: "",
+        passwordError: "",
+    };
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  handlePasswordChange(event) {
+    this.setState({
+        password: event.target.value,
+    });
+  }
+  handleEmailChange(event) {
+    this.setState({
+        email: event.target.value,
+    });
+  }
   handleSubmit(event) {
     if (this.state.password === " ") {
         this.setState({passwordError: "Vasya"});
@@ -25,10 +41,18 @@ class RegistrationForm extends Component {
         <form className="container" onSubmit={this.handleSubmit}>
           <h2>Sign up or die</h2>
             <div>
-              <EmailField />
+              <EmailField
+                  emailError={this.state.emailError}
+                  email={this.state.email}
+                  handleEmailChange={this.handleEmailChange}
+              />
             </div>
             <div>
-              <PasswordField />
+              <PasswordField
+                  passwordError={this.state.passwordError}
+                  password={this.state.password}
+                  handlePasswordChange={this.handlePasswordChange}
+              />
             </div>
           <RaisedButton type="submit" label="Sign up" className="primary mt-10" />
         </form>

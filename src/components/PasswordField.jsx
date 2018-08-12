@@ -2,28 +2,15 @@ import React, {Component} from "react";
 import TextField from 'material-ui/TextField';
 
 class PasswordField extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            password: "",
-            passwordError: "",
-        };
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    }
-    handlePasswordChange(event) {
-        this.setState({
-            password: event.target.value,
-        });
-    }
     render () {
         return (
             <TextField
-              errorText={this.state.passwordError}
+              errorText={this.props.passwordError}
               type="password"
               name="password"
               floatingLabelText="Password"
-              value={this.state.password}
-              onChange={this.handlePasswordChange}
+              value={this.props.password}
+              onChange={this.props.handlePasswordChange}
               required
             />
         )
