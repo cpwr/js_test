@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import RaisedButton from 'material-ui/RaisedButton';
 import EmailField from './EmailField.jsx';
 import PasswordField from './PasswordField.jsx';
+import {strengthColor, strengthIndicator} from "./StrenghtIndicator";
 
 class RegistrationForm extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class RegistrationForm extends Component {
         emailError: "",
         password: "",
         passwordError: "",
+        color: "red",
     };
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -19,6 +21,7 @@ class RegistrationForm extends Component {
   handlePasswordChange(event) {
     this.setState({
         password: event.target.value,
+        color: strengthColor(strengthIndicator(this.state.password)),
     });
   }
   handleEmailChange(event) {
@@ -52,6 +55,7 @@ class RegistrationForm extends Component {
                   passwordError={this.state.passwordError}
                   password={this.state.password}
                   handlePasswordChange={this.handlePasswordChange}
+                  color={this.state.color}
               />
             </div>
           <RaisedButton type="submit" label="Sign up" className="primary mt-10" />
